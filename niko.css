@@ -1,0 +1,235 @@
+* {
+	font-family: 'Courier New';
+}
+
+a {
+    text-decoration: none; 
+    color: black; 
+}
+
+p > a {
+	text-decoration: underline;
+	color: blue;
+}
+
+h1 {
+	/* font-family: 'Helvetica Neue'; */
+	/* font-style: italic; */
+	font-size: 50px;
+	text-align: center;
+	/* letter-spacing: .1em; */
+	margin: 0px;
+	/* make the h1 text outlined  */
+	/* -webkit-text-fill-color: transparent;
+	-webkit-text-stroke: 2px; */
+	-webkit-text-fill-color: black;
+	/* -webkit-text-stroke-color: darkmagenta; */
+}
+
+/* 
+classes for high level front page organization with header ribbon on top and main page body below
+*/
+
+.wrapper {
+	/* this container organizes the page into an upper header and body using a flexbox  */
+	display: flex;
+	flex-direction: column;
+	/* 100vh lets this container span the entire window  */
+	height: 100vh;
+}
+
+.page-header {
+	/* the header itself is another flexbox, allowing the name, blurb, and icons to resize nicely with the window  */
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	/* space-around is necessary for each item to stay centered when they stack on top of each other on small screens  */
+	justify-content: space-around;
+	align-items: center;
+	/* border: solid 1px blue; */
+}
+
+.headertile {
+	/* headertiles are the subunits of the header ribbon  */
+	padding: 10px;
+	/* border: solid 1px green; */
+}
+
+.frontpageblurb {
+	/* this class defines a text style for the blurb in the header ribbon  */
+	font-size: 15px;
+	text-align: center;
+	color: black;
+}
+
+ion-icon {
+	/* icons from ionicon site. should be resized in multiples of 8px  */
+	font-size: 32px;
+	color: black;
+}
+
+.page-main {
+	/* this is the container holding everything other than the header  */
+	/* adding flex-grow > 0 to this causes the header to stay constant while everything else fills the whole page  */
+	flex-grow: 1;
+	/* border: solid 1px red; */
+}
+
+/* 
+classes for front page grid of images 
+*/
+
+.frontpagetilegrid {
+	/* this is the container on the front page that holds all the image tiles */
+
+	/* set this class up as a flexbox */
+	display: flex;
+	/* tell the flexbox items to wrap into a grid of rows */
+	flex-direction: row;
+	flex-wrap: wrap;
+
+	/* border: solid 1px blue; */
+}
+
+.tile {
+	/* this is the subunit of frontpagetilegrid, a box that holds an image and scales with the window resizing */
+
+	/* set an arbitrary height of each tile that looks nice on desktop and mobile */
+	/* this is 40% of viewport height (vh)... usually fits 2 rows in a window */
+	height: 40vh;
+
+	/* each tile grows with equal 'strength' along with window resizing */
+	flex-grow: 1;
+
+	/* add a margin to space images out from each other */
+	margin: 0px;
+
+	/* background-color: tomato;
+	color: white;
+	border: solid 1px green; */
+}
+
+.tile:last-child {
+	/* little hack that puts a strongly-growing whitespace on the last line.
+	Must add an empty tile at the end of the list of tiles for this to work */
+	flex-grow: 10;
+}
+
+.tile img {
+	/* this defines the properties of all images inside a tile class  */
+
+	/* these max-height and min-width parameters are the key for the images to scale with the window  */
+	/* don't scale images bigger than full height of the flexbox tile */
+	max-height: 100%;
+	/* always scale images so their width fills the entire flexbox tile */
+	min-width: 100%;
+	/* fill the entire tile area with the image, even if it crops the image   */
+	object-fit: cover;
+	align-items: center;
+	/* vertical-align: bottom; */
+}
+
+.tile img:hover {
+	/* each image is a link. set the images to go opaque when hovered over  */
+	opacity: 0.5;
+}
+
+/* function to stack all images in a vertical feed on narrow screens */
+@media screen and (max-width: 500px) {
+	.frontpagetilegrid {
+		/* whole tile grid goes in an N-by-one column */
+		flex-direction: column;
+		flex-wrap: nowrap;
+	}
+
+	.tile img {
+		/* special image growing properties are reversed now that axes are swapped */
+		min-height: 100%;
+		max-width: 100%;
+	}
+
+	/* also size up all the header items a bit */
+	h1 {
+		font-size: 70px;
+	}
+
+	.frontpageblurb {
+		font-size: 20px;
+	}
+
+	ion-icon {
+		font-size: 40px;
+	}
+}
+
+/* 
+classes for project detail page, with a top header, text column, and image column
+*/
+
+.page-header-detail h1 {
+	/* link back to homepage goes on the top left */
+	text-align: left;
+	margin: 15px 5px 5px 5px;
+}
+
+.detailcolumns {
+	/* organize detail page into text column and media column */
+	display: flex;
+	flex-direction: row;
+}
+
+.detailcolumn-text {
+	/* keep text smaller than 40% of screen width */
+	max-width: 50vw;
+	min-width: 40vw;
+	/* border: solid 1px blue; */
+}
+
+.detailcolumn-media {
+	/* let text stay a constant proportion of the screen while images grow */
+	flex-grow: 1;
+	/* media column itself contains another vertical flexbox of images */
+	display: flex;
+	flex-direction: column;
+	/* border: solid 1px red; */
+}
+
+/* vertical flexbox subunit for media column */
+.detailcolumn-media-tile {
+	margin: 5px;
+	/* border: solid 1px green; */
+}
+
+.detailcolumn-media-tile img {
+	/* restrict media image width to size of container */
+	max-width: 100%;
+}
+
+/* function to wrap text above media on narrow screens */
+@media screen and (max-width: 1000px) {
+	/* media should wrap below text */
+	.detailcolumns {
+		flex-wrap: wrap;
+	}
+
+	/* text can now take up full width */
+	.detailcolumn-text {
+		max-width: 100vw;
+	}
+}
+
+/* header and paragraph formatting for detail captions */
+h2 {
+	font-size: 40px;
+	margin: 10px 15px 5px 15px;
+}
+
+h3 {
+	font-size: 20px;
+	margin: 0px 15px 10px 15px;
+}
+
+p {
+	font-size: 18px;
+	margin: 5px 30px 15px 30px;
+}
