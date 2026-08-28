@@ -27,13 +27,13 @@ doc.asis('<html lang="en">')
 with tag('html'):
     # add the header with meta information, css link, and favicon
     with tag('head'):
-        doc.stag('meta', name = 'description', content = "Niko's Website")
+        doc.stag('meta', name = 'description', content = "Theo's Website")
         doc.stag('meta', charset = 'utf-8')
         doc.stag('meta', name = 'viewport', content = 'width=device-width, initial-scale=1')
-        doc.stag('meta', name = 'author', content = "Niko Darci-Maher")
+        doc.stag('meta', name = 'author', content = "Theo Darci-Maher")
         with tag('title'):
-            text('Niko Darci-Maher')
-        doc.stag('link', rel = 'stylesheet', href = '../niko.css')
+            text('Theo Darci-Maher')
+        doc.stag('link', rel = 'stylesheet', href = '../theo.css')
         doc.stag('link', rel = 'icon', type = 'image/x-icon', href = '../favicon.png')
     # add the document body
     with tag('body'):
@@ -42,7 +42,7 @@ with tag('html'):
             with tag('div', ('class', 'page-header-detail')):
                 with tag('a', href = '../index.html'):
                     with tag('h1'):
-                        text('ndm')
+                        text('tdm')
             # text and media columns
             with tag('div', ('class', 'page-main')):
                 with tag('div', ('class', 'detailcolumns')):
@@ -61,7 +61,22 @@ with tag('html'):
                     with tag('div', ('class', 'detailcolumn-media')):
                         for i in range(0, len(detail_images)):
                             with tag('div', ('class', 'detailcolumn-media-tile')):
-                                doc.stag('img', src = detail_images[i], alt = detail_images_alt[i])
+                                if 'youtube.com' in detail_images[i]:
+                                    with tag(
+                                        'iframe',
+                                        src=detail_images[i],
+                                        title=detail_images_alt[i],
+                                        allowfullscreen='allowfullscreen'
+                                    ):
+                                        pass
+
+                                else:
+                                    doc.stag(
+                                        'img',
+                                        src=detail_images[i],
+                                        alt=detail_images_alt[i]
+                )
+                    
 
 # generate output HTML text with automatic tab indenting
 html_document = indent(doc.getvalue(), indentation = '\t')
@@ -69,3 +84,8 @@ html_document = indent(doc.getvalue(), indentation = '\t')
 # write the new HTML file in this project's directory
 with open(project + '/index.html', 'w') as f:
     f.write(html_document)
+
+#                    with tag('div', ('class', 'detailcolumn-media')):
+#                        for i in range(0, len(detail_images)):
+#                            with tag('div', ('class', 'detailcolumn-media-tile')):
+#                                doc.stag('img', src = detail_images[i], alt = detail_images_alt[i])
