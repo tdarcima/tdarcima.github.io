@@ -66,10 +66,10 @@ with tag('html'):
                                         'iframe',
                                         src=detail_images[i],
                                         title=detail_images_alt[i],
-                                        allowfullscreen='allowfullscreen'
+                                        height='500',
+                                        width='800'
                                     ):
                                         pass
-
                                 else:
                                     doc.stag(
                                         'img',
