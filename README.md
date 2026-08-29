@@ -1,16 +1,16 @@
-# Niko's Website
-This is a website for Niko Darci-Maher's personal gallery of creative projects.
+# Theo's Website
+This is a website for Theo Darci-Maher's personal collection of creative projects.
 
 ## Notes
-* Each folder represents an individual project. All media related to each project is stored inside that project's folder.
+* Each folder represents an individual project or pieces connected to one another. All media related to each project is stored inside that project's folder.
 
-* `niko.css` describes CSS styles for the entire site.
+* `theo.css` describes CSS styles for the entire site.
 
 * The `index.html` file in the home folder describes the website front page. Images on this page should be roughly 1MB in size.
 
 ## Adding a new project
 
-1. Create a directory inside `attofox.github.io` with a name for the project, e.g. `banana`.
+1. Create a directory inside `attofox.github.io` with a name for the project, e.g. `blue_bowls`.
 
 2. Drop at least one image for the project into the project directory, and make a lower-res thumbnail image cropped to look good on the tile grid. Give the image files descriptive names.
 
@@ -18,16 +18,16 @@ This is a website for Niko Darci-Maher's personal gallery of creative projects.
 ```
 Title
 Project medium
-Date [YYYY-MM-DD]
+Date
 Blurb to be placed alongside the art piece, in HTML formatting (e.g. \<i>italics\</i> and line breaks \<br/>)
 ```
 
 Example:
 ```
-Banana House
-Architectural Design
-2017-5-25
-I designed this house, inspired by a bunch of bananas, as my final project in my 12th grade Architecture class at Oakland Technical High School. 
+Blue Bowls
+Ceramics
+2024
+Two bowls in a set, where the glaze changes from inside to out.
 ```
 
 4. Create a file called `images.csv` inside the project folder, with this format (no quotes):
@@ -40,11 +40,11 @@ etc...
 
 Example:
 ```
-architecture_banana.png,Banana House
-topview.png,Top View 
-sideview.png,Side View
-downhillview.png,Downhill View 
-sectionview.PNG,Section View
+main_iso.jpg,Isometric View of Two Red Ceramic Bowls
+side_side.jpg,Side-by-side View of Two Red Ceramic Bowls
+stack.jpg,Two stacked Red Ceramic Bowls
+single.jpg,Single Red Ceramic Bowl
+notes.jpg,Notes on these pieces
 ```
 
 5. Run the python script (requires library yattag) to generate an index file for the project detail page:
@@ -55,14 +55,14 @@ python gen_detail_index.py <projectname>
 
 Example:
 ```
-python gen_detail_index.py banana
+python gen_detail_index.py blue_bowls
 ```
 
 6. Add a new tile to the main `index.html` page linking to your new project detail page in the grid of image tiles. It goes inside the `<div class="frontpagetilegrid">` object, wherever you want it to land on the front page!
 
 Example:
 ```{html}
-<a href="banana/index.html" class="tile">
-    <img src="banana/architecture_banana_thumbnail.png" alt="Banana House">
+<a href="blue_bowls/index.html" class="tile">
+    <img src="blue_bowls/main_iso.jpg" alt="Blue Bowls Isoemtric Photo">
 </a>
 ```
